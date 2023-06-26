@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>Project Management Form</title>
+    <script src="path/to/jpdb-commons.js"></script>
+    <script>
+        // Function to save the form data to the database
+        function saveData() {
+            // Retrieve the values from the input fields
+            var projectID = document.getElementById("projectID").value;
+            var projectName = document.getElementById("projectName").value;
+            var assignedTo = document.getElementById("assignedTo").value;
+            var assignmentDate = document.getElementById("assignmentDate").value;
+            var deadline = document.getElementById("deadline").value;
+            
+            // Construct the JSON object with the form data
+            var data = {
+                "Project-ID": projectID,
+                "Project-Name": projectName,
+                "Assigned-To": assignedTo,
+                "Assignment-Date": assignmentDate,
+                "Deadline": deadline
+            };
+            
+            // Send the data to the JPDB server using the appropriate command
+            var request = {
+                "cmd": "PUT",
+                "dbName": "COLLEGE-DB",
+                "rel": "PROJECT-TABLE",
+                "jsonStr": data
+            };
+            
+            // Execute the command
+            executeCommand(JSON.stringify(request));
+            
+            // After saving, you can display a success message or perform any other necessary action
+        }
+    </script>
+</head>
+<body>
+    <h1>Project Management Form</h1>
+    <form>
+        <label for="projectID">Project ID:</label>
+        <input type="text" id="projectID" required><br>
+        
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" required><br>
+        
+        <label for="assignedTo">Assigned To:</label>
+        <input type="text" id="assignedTo" required><br>
+        
+        <label for="assignmentDate">Assignment Date:</label>
+        <input type="date" id="assignmentDate" required><br>
+        
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" required><br>
+        
+        <button type="button" onclick="saveData()">Save</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>
